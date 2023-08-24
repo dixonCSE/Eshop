@@ -1,0 +1,154 @@
+<mat-toolbar color="primary">
+    <mat-toolbar-row class="top-bar">
+        <div class="top-bar">
+            <img
+                mat-card-sm-image
+                class="header-logo"
+                src="https://placehold.jp/3d4070/ffffff/150x50.png"
+                alt="P"
+            />
+            <!-- <div class="app-title">MY APP</div> -->
+        </div>
+    </mat-toolbar-row>
+    <mat-toolbar-row class="">
+        <div class="flex w-full">
+            <input
+                type="text"
+                id="search"
+                #search
+                class="grow"
+                placeholder="Search "
+                required
+                (keyup)="onKeyUp($event)"
+            />
+            <button type="button" class="search-submit" (click)="onSearch()">
+                <mat-icon>search</mat-icon>
+            </button>
+        </div>
+    </mat-toolbar-row>
+</mat-toolbar>
+
+<mat-toolbar color="primary" class="menu-bar">
+    <mat-toolbar-row class="menu-bar-row">
+        <a
+            mat-mini-fab
+            class="header-menu-icon"
+            aria-label="header-menu icon-button with menu icon"
+            routerLink="/home"
+            href="/home"
+        >
+            <mat-icon>home</mat-icon>
+        </a>
+
+        <!-- <img
+            mat-card-sm-image
+            class="header-user-image"
+            src="https://placehold.jp/3d4070/ffffff/80x80.png"
+            alt="P"
+        /> -->
+
+        <!-- <button
+            mat-mini-fab
+            class="header-menu-icon"
+            aria-label="header-menu icon-button with menu icon"
+        >
+            <mat-icon>category</mat-icon>
+        </button> -->
+
+        <button
+            mat-mini-fab
+            class="header-menu-icon"
+            aria-label="header-menu icon-button with menu icon"
+            (click)="catMenuDrawerToggle()"
+        >
+            <mat-icon>category</mat-icon>
+        </button>
+
+        <!-- <button
+            mat-mini-fab
+            class="header-menu-icon"
+            aria-label="header-menu icon-button with menu icon"
+            (click)="navMenuDrawerToggle()"
+        >
+            <mat-icon>menu</mat-icon>
+        </button> -->
+
+        <!-- <span class="header-spacer"></span> -->
+
+        <button
+            mat-mini-fab
+            class="header-menu-icon"
+            aria-label="header-menu icon-button with menu icon"
+            (click)="cartDrawer.toggle()"
+        >
+            <mat-icon>shopping_cart</mat-icon>
+        </button>
+
+        <img
+            *ngIf="_userStateService.isLogin(); else loggedOut"
+            mat-card-sm-image
+            class="header-user-image"
+            src="https://placehold.jp/3d4070/ffffff/80x80.png"
+            alt="P"
+            [matMenuTriggerFor]="menu"
+            aria-label="menu"
+        />
+
+        <mat-menu #menu="matMenu">
+            <!-- <a mat-menu-item routerLink="/user/profile" href="/user/profile">
+                <mat-icon>account_circle</mat-icon>
+                <span>Profile</span>
+            </a> -->
+            <button mat-menu-item (click)="this._authService.userLogout()">
+                <mat-icon>lock</mat-icon>
+                <span>Logout</span>
+            </button>
+        </mat-menu>
+
+        <ng-template #loggedOut>
+            <a
+                hrf="/login"
+                routerLink="/login"
+                mat-mini-fab
+                class="header-menu-icon"
+                aria-label="header-menu icon-button with menu icon"
+            >
+                <mat-icon>login</mat-icon>
+            </a>
+        </ng-template>
+    </mat-toolbar-row>
+</mat-toolbar>
+
+<div class="xcontainer">
+    <mat-drawer-container class="drawer-container">
+        <mat-drawer
+            #drawer
+            [mode]="sideNavMode"
+            [opened]="isSideNavOpen"
+            position="start"
+            class="drawer-side-container"
+        >
+            <app-side-nav *ngIf="isSideNav"></app-side-nav>
+            <cat-drawer
+                *ngIf="isSideCat"
+                [categories]="categories"
+            ></cat-drawer>
+        </mat-drawer>
+
+        <mat-drawer
+            #cartDrawer
+            mode="over"
+            [opened]="false"
+            position="end"
+            class="drawer-side-container"
+        >
+            <cart-drawer></cart-drawer>
+        </mat-drawer>
+
+        <mat-drawer-content>
+            <!-- //////////////////////////////////////////////////////////////////// -->
+
+            <router-outlet></router-outlet>
+        </mat-drawer-content>
+    </mat-drawer-container>
+</div>
