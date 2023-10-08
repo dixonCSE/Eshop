@@ -1,9 +1,15 @@
 /* ///////////////////////////////// begin header ///////////////////////////////// */
 
+.top-toolbar {
+    position: fixed;
+    top: 0;
+    z-index: 55;
+}
+
 .menu-bar {
     position: fixed;
     bottom: 0;
-    z-index: 99;
+    z-index: 54;
 }
 
 .menu-bar-row {
@@ -42,10 +48,17 @@
 .mat-toolbar-single-row {
     height: 54px;
 }
+
+mat-drawer {
+    position: fixed;
+    top: 6.7rem;
+    bottom: 3.3rem;
+}
 /* ////////////////////////////////// end header ////////////////////////////////// */
 
 mat-drawer-content {
     padding: 15px 10px;
+    margin-top: 7rem;
 }
 .xcontainer {
     // min-height: calc(100vh - 96px);
@@ -64,8 +77,8 @@ mat-drawer-content {
 
 .drawer-side-container {
     width: 280px;
-    background: rgb(13, 13, 46);
-    color: #fff;
+    // background: rgb(13, 13, 46);
+    // color: #fff;
 }
 
 /* ///////////////////////////////// begin footer ///////////////////////////////// */

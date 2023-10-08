@@ -2,6 +2,18 @@
 
 @include mat.core();
 
+$light-theme: mat.define-light-theme(
+    (
+        color: (
+            primary: mat.define-palette(mat.$teal-palette, 50),
+            accent: mat.define-palette(mat.$yellow-palette),
+            warn: mat.define-palette(mat.$pink-palette),
+        ),
+        typography: mat.define-typography-config(),
+        density: 0,
+    )
+);
+
 $dark-theme: mat.define-dark-theme(
     (
         color: (
@@ -14,20 +26,5 @@ $dark-theme: mat.define-dark-theme(
     )
 );
 
-$light-theme: mat.define-light-theme(
-    (
-        color: (
-            primary: mat.define-palette(mat.$teal-palette),
-            accent: mat.define-palette(mat.$yellow-palette),
-            warn: mat.define-palette(mat.$pink-palette),
-        ),
-    )
-);
-
-@include mat.core-theme($dark-theme);
-@include mat.button-theme($dark-theme);
-
-@media (prefers-color-scheme: light) {
-    @include mat.core-color($light-theme);
-    @include mat.button-color($light-theme);
-}
+// @include mat.core-theme($light-theme);
+@include mat.all-component-themes($light-theme);

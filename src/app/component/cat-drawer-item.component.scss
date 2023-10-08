@@ -5,11 +5,12 @@ div {
 }
 
 .side-nav-item {
-    color: #fff;
+    // color: #fff;
     padding: 0.75rem 0.25rem;
     display: flex;
     cursor: pointer;
     &:hover {
+        color: #ffff;
         background-color: #0008;
     }
 }

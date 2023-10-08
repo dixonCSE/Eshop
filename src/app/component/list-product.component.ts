@@ -27,8 +27,10 @@ import { RouterLink } from '@angular/router';
 
             .p-img {
                 width: 100%;
+                aspect-ratio: 1 / 1;
             }
         </style>
+
         <div class="min-h-245">
             <mat-card class="product-card">
                 <div class="relative">
@@ -40,7 +42,7 @@ import { RouterLink } from '@angular/router';
                         ><img
                             class="p-img"
                             [src]="product.image_thumb"
-                            alt="cv"
+                            alt=""
                         />
                     </a>
                     <mat-card-actions
@@ -63,7 +65,7 @@ import { RouterLink } from '@angular/router';
                 <mat-card-content>
                     <div class="text-base text-center">
                         <a
-                            class="no-underline text-gray-50"
+                            class="no-underline"
                             title="{{ product.name }}"
                             href="/product/{{ product.id }}"
                             [routerLink]="['/product', product.id]"

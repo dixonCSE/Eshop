@@ -6,6 +6,7 @@ import { IProduct } from 'src/app/interface/product.interface';
 import { MaterialModule } from 'src/app/material.module';
 import { CartStateService } from 'src/app/state/cart.state.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { GlobalConstants as gData } from 'src/app/data/global-constants';
 
 @Component({
     selector: 'product-detail-component',
@@ -37,7 +38,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
             <div id="product-image" class="flex justify-center py-2">
                 <img
                     class="p-img"
-                    src="https://mart.bijoy.club/assets/media/product/7d9a64929df7d1cbffa14714ae6e956f_thumb.jpg"
+                    [src]="xgData.assetsBaseURL + product?.product.image"
                     alt="img"
                 />
             </div>
@@ -182,6 +183,7 @@ export class ProductDetailComponent {
     productId: any = 0;
     product?: any;
     qty: number = 1;
+    xgData = gData;
 
     constructor(
         private _activatedRoute: ActivatedRoute,
@@ -193,8 +195,6 @@ export class ProductDetailComponent {
             this.productId = val['id'];
             this._productService.getProduct(val['id']).subscribe((res) => {
                 this.product = res;
-                console.log(res);
-                console.log(this.product);
             });
         });
     }

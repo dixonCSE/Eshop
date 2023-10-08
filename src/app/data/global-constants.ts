@@ -1,4 +1,5 @@
 export class GlobalConstants {
-    public static apiBaseURL: string = 'https://mart.bijoy.club/ecom/api/';
-    public static assetsBaseURL: string = 'https://mart.bijoy.club/';
+    public static apiBaseURL: string =
+        'https://ecom.relationsupershop.com/ecom/api/';
+    public static assetsBaseURL: string = 'https://ecom.relationsupershop.com/';
 }

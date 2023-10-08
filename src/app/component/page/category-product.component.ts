@@ -21,9 +21,9 @@ import { CatScrollComponent } from '../cat-scroll.component';
         <div class="text-center text-amber-500 font-bold text-2xl my-5  ">
             {{ cat?.name | titlecase }}
         </div>
-        <section>
+        <div class="mb-4">
             <cat-scroll-component [catItem]="subCat"></cat-scroll-component>
-        </section>
+        </div>
         <div class="grid grid-cols-2 gap-2 md:grid-cols-4 lg:grid-cols-6">
             <div class="product-list-item" *ngFor="let item of products">
                 <list-product [product]="item"></list-product>

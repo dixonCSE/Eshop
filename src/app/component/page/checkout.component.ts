@@ -185,6 +185,28 @@ import { MatSnackBar } from '@angular/material/snack-bar';
                                 </textarea>
                             </mat-form-field>
                         </p>
+
+                        <p>
+                            <mat-form-field
+                                appearance="outline"
+                                hideRequiredMarker
+                            >
+                                <mat-label> Pick point </mat-label>
+
+                                <mat-select
+                                    #pickPoint
+                                    id="pickPoint"
+                                    formControlName="pickPoint"
+                                >
+                                    <mat-option
+                                        *ngFor="let element of pickPoints"
+                                        [value]="element.id"
+                                    >
+                                        {{ element.name }}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </p>
                     </mat-card-content>
                     <mat-card-actions>
                         <button
@@ -206,6 +228,8 @@ export class CheckoutComponent implements OnInit {
     isSubmitBtnEnable = true;
     isLoading = false;
 
+    pickPoints: any[] = [];
+
     constructor(
         public _cartStateService: CartStateService,
         private _cartService: CartService,
@@ -224,7 +248,19 @@ export class CheckoutComponent implements OnInit {
                 [Validators.required, Validators.pattern('[0][1][0-9]{9}')],
             ],
             address: ['', [Validators.required]],
+            pickPoint: ['', [Validators.required]],
         });
+
+        this._cartService.pickPoint().subscribe(
+            (res) => {
+                if (res.type == 'success') {
+                    this.pickPoints = res.data;
+                }
+            },
+            (err) => {
+                console.log(err);
+            }
+        );
     }
 
     onSubmit() {

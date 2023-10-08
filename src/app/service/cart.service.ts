@@ -9,6 +9,7 @@ import { CommonService } from './common.service';
 })
 export class CartService {
     private _checkoutUrl: string = 'checkout';
+    private _pickpointUrl: string = 'pickpoint';
 
     constructor(
         private http: HttpClient,
@@ -24,5 +25,9 @@ export class CartService {
         /* return this.http.post<any>(this._checkoutUrl, data, {
             observe: 'response',
         }); */
+    }
+
+    pickPoint(): Observable<any> {
+        return this._commonService.get(this._pickpointUrl);
     }
 }

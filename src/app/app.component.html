@@ -1,11 +1,11 @@
-<mat-toolbar color="primary">
-    <mat-toolbar-row class="top-bar">
+<mat-toolbar color="primary" class="top-toolbar">
+    <mat-toolbar-row>
         <div class="top-bar">
             <img
                 mat-card-sm-image
                 class="header-logo"
-                src="https://placehold.jp/3d4070/ffffff/150x50.png"
-                alt="P"
+                src="assets/logo.png"
+                alt="logo"
             />
             <!-- <div class="app-title">MY APP</div> -->
         </div>
@@ -145,7 +145,7 @@
             <cart-drawer></cart-drawer>
         </mat-drawer>
 
-        <mat-drawer-content>
+        <mat-drawer-content class="mat-drawer-content">
             <!-- //////////////////////////////////////////////////////////////////// -->
 
             <router-outlet></router-outlet>
