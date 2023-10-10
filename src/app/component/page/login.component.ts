@@ -18,7 +18,7 @@ import { UserStateService } from 'src/app/state/user.state.service';
     template: `
         <style>
             * {
-                color: #ffff;
+                color: #000;
             }
             .loginForm {
                 min-width: 18rem;
