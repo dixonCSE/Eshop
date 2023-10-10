@@ -82,6 +82,9 @@
             (click)="cartDrawer.toggle()"
         >
             <mat-icon>shopping_cart</mat-icon>
+            <span style="font-size: 0.75rem">{{
+                this._cartStateService.totalItems()
+            }}</span>
         </button>
 
         <img

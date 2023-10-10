@@ -14,10 +14,13 @@ import {
 } from '@angular/cdk/layout';
 import { Subject, Observable } from 'rxjs';
 import { map, takeUntil } from 'rxjs/operators';
+
 import { MatDrawerMode, MatSidenav } from '@angular/material/sidenav';
+
 import { CategoryService } from './service/category.service';
 import { AuthService } from './service/auth.service';
 import { UserStateService } from './state/user.state.service';
+import { CartStateService } from './state/cart.state.service';
 
 @Component({
     selector: 'app-root',
@@ -57,7 +60,8 @@ export class AppComponent implements OnInit, OnDestroy {
         private _router: Router,
         private _categoryService: CategoryService,
         public _authService: AuthService,
-        public _userStateService: UserStateService
+        public _userStateService: UserStateService,
+        public _cartStateService: CartStateService
     ) {
         /* breakpointObserver
             .observe([

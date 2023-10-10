@@ -23,7 +23,7 @@ import { CatScrollComponent } from '../cat-scroll.component';
                 [images]="imageObject"
                 [infinite]="true"
                 [autoSlide]="1"
-                [imageSize]="{ width: '100%', height: 200 }"
+                [imageSize]="{ height: 200 }"
             ></ng-image-slider>
         </section>
 
