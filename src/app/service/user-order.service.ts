@@ -37,7 +37,11 @@ export class UserOrderService {
 
     get(id: number): Observable<any> {
         let requestUrl = `${this._orderDetailUrl}?id=${id}`;
+        return this._commonService.get(requestUrl);
+    }
 
+    getUserOrder(id: number | undefined): Observable<any> {
+        let requestUrl = `user_order?id=${id}`;
         return this._commonService.get(requestUrl);
     }
 }

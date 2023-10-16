@@ -76,7 +76,7 @@ export class CartStateService {
             return element.productId == data.id;
         });
 
-        console.log(index);
+        console.log(data);
 
         if (index == -1) {
             this.cartItems.mutate((val) => {

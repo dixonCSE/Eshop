@@ -7,6 +7,7 @@ import { MaterialModule } from 'src/app/material.module';
 import { CartStateService } from 'src/app/state/cart.state.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { GlobalConstants as gData } from 'src/app/data/global-constants';
+import { BreakpointService } from 'src/app/service/breakpoint.service';
 
 @Component({
     selector: 'product-detail-component',
@@ -40,6 +41,7 @@ import { GlobalConstants as gData } from 'src/app/data/global-constants';
                     class="p-img"
                     [src]="xgData.assetsBaseURL + product?.product.image"
                     alt="img"
+                    [style]="imageStyle"
                 />
             </div>
             <div id="product-info" class="text-center">
@@ -184,8 +186,11 @@ export class ProductDetailComponent {
     product?: any;
     qty: number = 1;
     xgData = gData;
+    displaySize: number = 4;
+    imageStyle: string = 'width: 100%';
 
     constructor(
+        private _breakpointService: BreakpointService,
         private _activatedRoute: ActivatedRoute,
         private _productService: ProductService,
         private _CartStateService: CartStateService,
@@ -199,9 +204,16 @@ export class ProductDetailComponent {
         });
     }
 
-    ngOnInit(): void {}
+    ngOnInit(): void {
+        this.displaySize = this._breakpointService.getBreakpoint();
+        if (this.displaySize >= 2) {
+            this.imageStyle = 'width: 520px;';
+        }
+    }
 
     addCart() {
+        this.product.product.image_thumb =
+            gData.assetsBaseURL + this.product.product.image_thumb;
         this._CartStateService.addCart(this.product.product, this.qty);
 
         // console.log(this._CartStateService.cartItems());

@@ -63,10 +63,8 @@ export class SearchComponent implements OnInit {
                 .subscribe((res) => {
                     //console.log(res.product);
                     res.product.map((item: any) => {
-                        // let image_thumb =
-                        gData.assetsBaseURL + item.image_thumb;
                         let image_thumb =
-                            'https://mart.bijoy.club/assets/media/product/7d9a64929df7d1cbffa14714ae6e956f_thumb.jpg';
+                            gData.assetsBaseURL + item.image_thumb;
                         this.products.push({
                             id: item.id,
                             code: item.code,

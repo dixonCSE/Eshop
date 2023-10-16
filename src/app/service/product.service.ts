@@ -18,6 +18,25 @@ export class ProductService {
         );
     }
 
+    getDisplayProducts(key_code: string): Observable<any> {
+        let api_url: string =
+            gData.apiBaseURL + 'display_product?key=' + key_code;
+        return this._http.get<any>(api_url).pipe(
+            map((data) => {
+                return data;
+            })
+        );
+    }
+
+    getDisplayView(): Observable<any> {
+        let api_url: string = gData.apiBaseURL + 'display_view';
+        return this._http.get<any>(api_url).pipe(
+            map((data) => {
+                return data;
+            })
+        );
+    }
+
     getProduct(id: number): Observable<any> {
         let api_url: string = gData.apiBaseURL + 'get_product?id=' + id;
         return this._http.get<any>(api_url).pipe(

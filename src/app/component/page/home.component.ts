@@ -1,30 +1,36 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ProductListComponent } from '../product-list.component';
-import { NgImageSliderModule } from 'ng-image-slider';
-import { CategoryService } from 'src/app/service/category.service';
+
 import { RouterLink } from '@angular/router';
+import { ProductListComponent } from '../product-list.component';
+import { CategoryService } from 'src/app/service/category.service';
 import { CatScrollComponent } from '../cat-scroll.component';
+import { SliderComponent } from '../slider.component';
+import { ProductService } from 'src/app/service/product.service';
 
 @Component({
     selector: 'home-component',
     standalone: true,
+    imports: [
+        CommonModule,
+        ProductListComponent,
+        RouterLink,
+        CatScrollComponent,
+        SliderComponent,
+    ],
     styles: [],
     template: `
         <style>
             .twg {
                 background-color: brown;
             }
+            a {
+                text-decoration: none;
+            }
         </style>
 
         <section>
-            <ng-image-slider
-                #nav
-                [images]="imageObject"
-                [infinite]="true"
-                [autoSlide]="1"
-                [imageSize]="{ height: 200 }"
-            ></ng-image-slider>
+            <image-slider></image-slider>
         </section>
 
         <section>
@@ -33,84 +39,51 @@ import { CatScrollComponent } from '../cat-scroll.component';
             ></cat-scroll-component>
         </section>
 
-        <section>
+        <section *ngFor="let item of displayView">
             <div class="text-center text-amber-500 font-bold text-2xl my-5  ">
-                Feature
+                {{ item.name }}
             </div>
-            <product-list></product-list>
+            <product-list [key_code]="item.key_code"></product-list>
             <div>
                 <div></div>
                 <div>view all</div>
             </div>
         </section>
 
-        <section>
+        <!-- <section>
             <div class="text-center text-amber-500 font-bold text-2xl my-5  ">
-                Best Sale
+                Best Product
             </div>
-            <product-list></product-list>
-        </section>
+            <product-list key_code="best_sale"></product-list>
+        </section> -->
 
-        <section>
-            <div class="text-center text-amber-500 font-bold text-2xl my-5  ">
-                Offer Product
-            </div>
-            <product-list></product-list>
+        <section class="mt-8 px-1 py-2 bg-slate-500  text-center">
+            <a
+                routerLink="/privacy-policy"
+                href="/privacy-policy"
+                class="text-orange-200"
+            >
+                privacy policy</a
+            >
         </section>
     `,
-    imports: [
-        CommonModule,
-        ProductListComponent,
-        NgImageSliderModule,
-        RouterLink,
-        CatScrollComponent,
-    ],
 })
 export class HomeComponent implements OnInit {
-    imageObject: Array<object> = [
-        {
-            image: 'https://sanjayv.github.io/ng-image-slider/contents/assets/img/slider/5.jpg',
-            thumbImage:
-                'https://sanjayv.github.io/ng-image-slider/contents/assets/img/slider/5.jpg',
-            title: 'Hummingbirds are amazing creatures',
-        },
-        {
-            image: 'https://sanjayv.github.io/ng-image-slider/contents/assets/img/slider/9.jpg',
-            thumbImage:
-                'https://sanjayv.github.io/ng-image-slider/contents/assets/img/slider/9.jpg',
-        },
-        {
-            image: 'https://sanjayv.github.io/ng-image-slider/contents/assets/img/slider/4.jpg',
-            thumbImage:
-                'https://sanjayv.github.io/ng-image-slider/contents/assets/img/slider/4.jpg',
-            title: 'Example with title.',
-        },
-        {
-            image: 'https://sanjayv.github.io/ng-image-slider/contents/assets/img/slider/7.jpg',
-            thumbImage:
-                'https://sanjayv.github.io/ng-image-slider/contents/assets/img/slider/7.jpg',
-            title: 'Hummingbirds are amazing creatures',
-        },
-        {
-            image: 'https://sanjayv.github.io/ng-image-slider/contents/assets/img/slider/1.jpg',
-            thumbImage:
-                'https://sanjayv.github.io/ng-image-slider/contents/assets/img/slider/1.jpg',
-        },
-        {
-            image: 'https://sanjayv.github.io/ng-image-slider/contents/assets/img/slider/2.jpg',
-            thumbImage:
-                'https://sanjayv.github.io/ng-image-slider/contents/assets/img/slider/2.jpg',
-            title: 'Example two with title.',
-        },
-    ];
-
     parent_category: any;
+    displayView: any;
 
-    constructor(private _categoryService: CategoryService) {}
+    constructor(
+        private _categoryService: CategoryService,
+        private _productService: ProductService
+    ) {}
 
     ngOnInit(): void {
-        this._categoryService.getCategory().subscribe((data) => {
-            this.parent_category = data.data.category;
+        this._categoryService.getCategory().subscribe((res) => {
+            this.parent_category = res.data.category;
+        });
+
+        this._productService.getDisplayView().subscribe((res) => {
+            this.displayView = res.data;
         });
     }
 }

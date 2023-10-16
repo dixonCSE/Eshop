@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Router, ActivatedRoute, ParamMap } from '@angular/router';
+
 import { CartStateService } from 'src/app/state/cart.state.service';
 import { MaterialModule } from 'src/app/material.module';
 import { CartItemComponent } from '../cart-item.component';
@@ -13,7 +15,7 @@ import { CartService } from 'src/app/service/cart.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
-    selector: 'cart-component',
+    selector: 'checkout-component',
     standalone: true,
     imports: [
         CommonModule,
@@ -24,6 +26,9 @@ import { MatSnackBar } from '@angular/material/snack-bar';
     styles: [],
     template: `
         <style>
+            * {
+                color: #000;
+            }
             mat-card-content {
             }
             table {
@@ -200,7 +205,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
                                 >
                                     <mat-option
                                         *ngFor="let element of pickPoints"
-                                        [value]="element.id"
+                                        [value]="element.name"
                                     >
                                         {{ element.name }}
                                     </mat-option>
@@ -234,7 +239,8 @@ export class CheckoutComponent implements OnInit {
         public _cartStateService: CartStateService,
         private _cartService: CartService,
         private fb: FormBuilder,
-        private _snackBar: MatSnackBar
+        private _snackBar: MatSnackBar,
+        private _router: Router
     ) {
         //
     }
@@ -281,6 +287,7 @@ export class CheckoutComponent implements OnInit {
             phone: this.form.value.phone,
             email: this.form.value.email,
             address: this.form.value.address,
+            pickpoint: this.form.value.pickPoint,
             user_order_item: user_order_item,
         };
 
@@ -297,6 +304,8 @@ export class CheckoutComponent implements OnInit {
                         horizontalPosition: 'start',
                         verticalPosition: 'bottom',
                     });
+
+                    this._router.navigate(['checkout-complete', res.data.id]);
                 } else {
                     this._snackBar.open('error in checkout ', '', {
                         duration: 1.2 * 1000,

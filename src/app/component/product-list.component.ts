@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+
 import { ListProductComponent } from './list-product.component';
 import { ProductService } from '../service/product.service';
 import { IProduct } from '../interface/product.interface';
@@ -23,12 +24,15 @@ import { GlobalConstants as gData } from '../data/global-constants';
     `,
 })
 export class ProductListComponent implements OnInit {
+    @Input()
+    key_code!: string;
+
     products: IProduct[] = [];
 
     constructor(private _productService: ProductService) {}
 
     ngOnInit(): void {
-        this._productService.getProducts().subscribe((data) => {
+        /* this._productService.getProducts().subscribe((data) => {
             //console.log(data);
             data.products.map((item: any) => {
                 let image_thumb = gData.assetsBaseURL + item.image_thumb;
@@ -43,6 +47,22 @@ export class ProductListComponent implements OnInit {
                     image_thumb: image_thumb,
                 });
             });
-        });
+        }); */
+
+        this._productService
+            .getDisplayProducts(this.key_code)
+            .subscribe((data) => {
+                data.products.map((item: any) => {
+                    let image_thumb = gData.assetsBaseURL + item.image_thumb;
+                    this.products.push({
+                        id: item.id,
+                        code: item.code,
+                        name: item.name,
+                        price: item.price,
+                        old_price: item.old_price,
+                        image_thumb: image_thumb,
+                    });
+                });
+            });
     }
 }

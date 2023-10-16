@@ -26,6 +26,15 @@ const routes: Routes = [
         pathMatch: 'full',
     },
     {
+        path: 'privacy-policy',
+        loadComponent: () =>
+            import('./component/page/privacy-policy.component').then(
+                (mod) => mod.PrivacyPolicyComponent
+            ),
+        title: 'PrivacyPolicy',
+        pathMatch: 'full',
+    },
+    {
         path: 'product/:id',
         loadComponent: () =>
             import('./component/page/product-detail.component').then(
@@ -68,6 +77,15 @@ const routes: Routes = [
                 (mod) => mod.SearchComponent
             ),
         title: 'search',
+        pathMatch: 'full',
+    },
+    {
+        path: 'checkout-complete/:num',
+        loadComponent: () =>
+            import('./component/page/checkout-complete.component').then(
+                (mod) => mod.CheckoutCompleteComponent
+            ),
+        title: 'Complete',
         pathMatch: 'full',
     },
 ];
