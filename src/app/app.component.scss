@@ -17,8 +17,9 @@
 }
 .top-bar {
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     height: 100%;
+    width: inherit;
     align-items: center;
 }
 .app-title {
@@ -54,6 +55,10 @@ mat-drawer {
     top: 6.7rem;
     bottom: 3.3rem;
 }
+
+.bg-icon {
+    background-color: #429b9e;
+}
 /* ////////////////////////////////// end header ////////////////////////////////// */
 
 mat-drawer-content {
@@ -79,6 +84,9 @@ mat-drawer-content {
     width: 280px;
     // background: rgb(13, 13, 46);
     // color: #fff;
+}
+.cart-drawer-side-container {
+    width: 100%;
 }
 
 /* ///////////////////////////////// begin footer ///////////////////////////////// */

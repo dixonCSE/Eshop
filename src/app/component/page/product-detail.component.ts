@@ -29,11 +29,11 @@ import { BreakpointService } from 'src/app/service/breakpoint.service';
             }
         </style>
 
-        <section id="breadcrumb">
+        <!-- <section id="breadcrumb">
             <div id="breadcrumb-list" class="text-center text-amber-500 my-5  ">
                 product ID: {{ productId }}
             </div>
-        </section>
+        </section> -->
 
         <section id="product-info">
             <div id="product-image" class="flex justify-center py-2">
