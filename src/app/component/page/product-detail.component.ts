@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ProductService } from 'src/app/service/product.service';
 import { IProduct } from 'src/app/interface/product.interface';
 import { MaterialModule } from 'src/app/material.module';
@@ -53,15 +53,7 @@ import { BreakpointService } from 'src/app/service/breakpoint.service';
 
             <mat-card>
                 <mat-card-content>
-                    <div class="flex justify-between">
-                        <button
-                            mat-flat-button
-                            color="primary"
-                            (click)="addCart()"
-                        >
-                            <mat-icon>add</mat-icon>
-                            <mat-icon>shopping_cart</mat-icon>
-                        </button>
+                    <div class="flex justify-center">
                         <div>
                             <div class="inline-flex rounded-md shadow-sm">
                                 <button
@@ -115,8 +107,25 @@ import { BreakpointService } from 'src/app/service/breakpoint.service';
                                 </button>
                             </div>
                         </div>
-                        <button mat-mini-fab color="warn" class="w-9 h-9">
-                            <mat-icon class="text-base">share</mat-icon>
+                    </div>
+
+                    <div class="flex justify-between mt-2">
+                        <button
+                            class="mx-2"
+                            mat-flat-button
+                            color="primary"
+                            (click)="addCart()"
+                        >
+                            <mat-icon>add</mat-icon>
+                            <mat-icon>shopping_cart</mat-icon>
+                        </button>
+                        <button
+                            class="mx-2"
+                            mat-flat-button
+                            color="primary"
+                            (click)="buyNow()"
+                        >
+                            Buy now
                         </button>
                     </div>
                 </mat-card-content>
@@ -192,6 +201,7 @@ export class ProductDetailComponent {
     constructor(
         private _breakpointService: BreakpointService,
         private _activatedRoute: ActivatedRoute,
+        private _router: Router,
         private _productService: ProductService,
         private _CartStateService: CartStateService,
         private _snackBar: MatSnackBar
@@ -223,6 +233,14 @@ export class ProductDetailComponent {
             horizontalPosition: 'start',
             verticalPosition: 'bottom',
         });
+    }
+
+    buyNow() {
+        this.product.product.image_thumb =
+            gData.assetsBaseURL + this.product.product.image_thumb;
+        this._CartStateService.addCart(this.product.product, this.qty);
+
+        this._router.navigate(['/checkout']);
     }
 
     qtyIncrement() {

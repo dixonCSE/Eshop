@@ -6,8 +6,7 @@ import { CommonService } from './common.service';
     providedIn: 'root',
 })
 export class UserOrderService {
-    private _orderListUrl: string = 'user_order_datatable';
-    private _orderDetailUrl: string = 'user_order_detail';
+    private _orderListUrl: string = 'user_order';
 
     constructor(public _commonService: CommonService) {
         //
@@ -35,8 +34,8 @@ export class UserOrderService {
         );
     }
 
-    get(id: number): Observable<any> {
-        let requestUrl = `${this._orderDetailUrl}?id=${id}`;
+    get(id: number | undefined): Observable<any> {
+        let requestUrl = `user_order_detail?id=${id}`;
         return this._commonService.get(requestUrl);
     }
 

@@ -126,14 +126,14 @@ import { MatSnackBar } from '@angular/material/snack-bar';
                                 appearance="outline"
                                 hideRequiredMarker
                             >
-                                <mat-label> User Name </mat-label>
+                                <mat-label> Full Name </mat-label>
                                 <input
                                     matInput
                                     #username
                                     type="text"
                                     id="username"
                                     formControlName="username"
-                                    placeholder="User Name"
+                                    placeholder="Full Name"
                                 />
                             </mat-form-field>
                         </p>

@@ -31,7 +31,7 @@ interface IDatatable {
     template: `
         <style>
             * {
-                color: #ffff;
+                color: #000;
             }
             .container {
                 position: relative;
@@ -115,18 +115,21 @@ interface IDatatable {
                     <ng-container matColumnDef="id">
                         <th mat-header-cell *matHeaderCellDef>#</th>
                         <td mat-cell *matCellDef="let element">
-                            {{ element.id.toString(16) }}
+                            <a
+                                class="header-menu-icon bg-icon"
+                                aria-label="link-order"
+                                routerLink="/user-order/{{
+                                    element.id.toString(16)
+                                }}"
+                                href="/user-order/{{ element.id.toString(16) }}"
+                            >
+                                View
+                            </a>
                         </td>
                     </ng-container>
 
                     <ng-container matColumnDef="net_price">
-                        <th
-                            mat-header-cell
-                            mat-sort-header="net_price"
-                            *matHeaderCellDef
-                        >
-                            Total
-                        </th>
+                        <th mat-header-cell *matHeaderCellDef>Total</th>
                         <td mat-cell *matCellDef="let element">
                             {{ element.net_price | currency }}
                         </td>
@@ -147,13 +150,7 @@ interface IDatatable {
                     </ng-container>
 
                     <ng-container matColumnDef="created_date">
-                        <th
-                            mat-header-cell
-                            mat-sort-header="created_date"
-                            *matHeaderCellDef
-                        >
-                            Date
-                        </th>
+                        <th mat-header-cell *matHeaderCellDef>Date</th>
                         <td mat-cell *matCellDef="let element">
                             {{ element.created_date }}
                         </td>

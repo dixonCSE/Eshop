@@ -88,6 +88,24 @@ const routes: Routes = [
         title: 'Complete',
         pathMatch: 'full',
     },
+    {
+        path: 'user-order',
+        loadComponent: () =>
+            import('./component/page/order-list.component').then(
+                (mod) => mod.OrderListComponent
+            ),
+        title: 'Order',
+        pathMatch: 'full',
+    },
+    {
+        path: 'user-order/:id',
+        loadComponent: () =>
+            import('./component/page/order-detail.component').then(
+                (mod) => mod.OrderDetailComponent
+            ),
+        title: 'Order',
+        pathMatch: 'full',
+    },
 ];
 
 @NgModule({

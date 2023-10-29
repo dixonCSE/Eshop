@@ -90,8 +90,8 @@ export class AppComponent implements OnInit, OnDestroy {
     @ViewChild('drawer')
     drawer!: MatSidenav;
 
-    @ViewChild('cartDrawer')
-    cartDrawer!: MatSidenav;
+    /* @ViewChild('cartDrawer')
+    cartDrawer!: MatSidenav; */
 
     ngOnInit(): void {
         this._router.events.subscribe((_routerEvent: Event) => {
@@ -100,7 +100,7 @@ export class AppComponent implements OnInit, OnDestroy {
                     this.drawer.close();
                 }
 
-                this.cartDrawer.close();
+                // this.cartDrawer.close();
             }
         });
 
@@ -109,6 +109,8 @@ export class AppComponent implements OnInit, OnDestroy {
         } else {
             this._userStateService.isLoginFalse();
         }
+
+        this._userStateService.loadUserState();
 
         this._categoryService.getCategoryTree().subscribe((data) => {
             this.categories = data.data.category;
@@ -156,5 +158,10 @@ export class AppComponent implements OnInit, OnDestroy {
     ngOnDestroy() {
         this.destroyed.next();
         this.destroyed.complete();
+    }
+
+    onLogOut() {
+        this._userStateService.isLoginFalse();
+        this._authService.userLogout();
     }
 }

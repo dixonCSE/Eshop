@@ -25,7 +25,7 @@ export class CartStateService {
         let key: string = 'cart';
         let data: any = localStorage.getItem('cart');
 
-        console.log('load', data);
+        // console.log('load', data);
 
         if (data == null || data == undefined) {
         } else {
@@ -76,7 +76,7 @@ export class CartStateService {
             return element.productId == data.id;
         });
 
-        console.log(data);
+        // console.log(data);
 
         if (index == -1) {
             this.cartItems.mutate((val) => {

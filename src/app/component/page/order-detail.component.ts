@@ -4,6 +4,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { AuthService } from 'src/app/service/auth.service';
 import { UserOrderService } from 'src/app/service/user-order.service';
 import { MaterialModule } from 'src/app/material.module';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
     selector: 'order-detail-component',
@@ -79,7 +80,7 @@ import { MaterialModule } from 'src/app/material.module';
                                     <div>Total</div>
                                 </td>
                                 <td class="text-left text-green-500">
-                                    {{ order.totalPrice | currency }}
+                                    {{ order?.net_price | currency }}
                                 </td>
                             </tr>
                         </tbody>
@@ -90,14 +91,24 @@ import { MaterialModule } from 'src/app/material.module';
     `,
 })
 export class OrderDetailComponent implements OnInit, OnDestroy {
-    order: any;
+    order?: any;
     orderItem: any[] = [];
+    orderID: any = 0;
 
     constructor(
         private _authService: AuthService,
+        private _activatedRoute: ActivatedRoute,
         private _userOrderService: UserOrderService,
         public dialog: MatDialog
-    ) {}
+    ) {
+        _activatedRoute.params.subscribe((val) => {
+            this.orderID = val['id'];
+            this._userOrderService.get(this.orderID).subscribe((res) => {
+                this.order = res.data.user_order;
+                this.orderItem = res.data.user_order_item;
+            });
+        });
+    }
 
     ngOnInit(): void {}
 

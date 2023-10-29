@@ -84,11 +84,24 @@
 
         <!-- <span class="header-spacer"></span> -->
 
-        <button
+        <!-- <button
             mat-mini-fab
             class="header-menu-icon bg-icon"
             aria-label="header-menu icon-button with menu icon"
             (click)="cartDrawer.toggle()"
+        >
+            <mat-icon>shopping_cart</mat-icon>
+            <span style="font-size: 0.75rem">{{
+                this._cartStateService.totalItems()
+            }}</span>
+        </button> -->
+
+        <button
+            mat-mini-fab
+            class="header-menu-icon bg-icon"
+            aria-label="header-menu icon-button with menu icon"
+            routerLink="/cart"
+            href="/cart"
         >
             <mat-icon>shopping_cart</mat-icon>
             <span style="font-size: 0.75rem">{{
@@ -100,18 +113,18 @@
             *ngIf="_userStateService.isLogin(); else loggedOut"
             mat-card-sm-image
             class="header-user-image bg-icon"
-            src="https://placehold.jp/3d4070/ffffff/80x80.png"
+            src="{{ this._userStateService.user()?.image }}"
             alt="P"
             [matMenuTriggerFor]="menu"
             aria-label="menu"
         />
 
         <mat-menu #menu="matMenu">
-            <!-- <a mat-menu-item routerLink="/user/profile" href="/user/profile">
+            <a mat-menu-item routerLink="/user-order" href="/user-order">
                 <mat-icon>account_circle</mat-icon>
-                <span>Profile</span>
-            </a> -->
-            <button mat-menu-item (click)="this._authService.userLogout()">
+                <span> My Order </span>
+            </a>
+            <button mat-menu-item (click)="onLogOut()">
                 <mat-icon>lock</mat-icon>
                 <span>Logout</span>
             </button>
@@ -147,7 +160,7 @@
             ></cat-drawer>
         </mat-drawer>
 
-        <mat-drawer
+        <!-- <mat-drawer
             #cartDrawer
             mode="over"
             [opened]="false"
@@ -155,7 +168,7 @@
             class="cart-drawer-side-container"
         >
             <cart-drawer></cart-drawer>
-        </mat-drawer>
+        </mat-drawer> -->
 
         <mat-drawer-content class="mat-drawer-content">
             <!-- //////////////////////////////////////////////////////////////////// -->
