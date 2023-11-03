@@ -25,13 +25,15 @@ export class UserStateService {
     }
 
     loadUserState() {
-        this._authService.userData().subscribe((res) => {
-            let img = gData.assetsBaseURL + res.data.image;
-            this.user.set({
-                id: res.data.id,
-                loginId: res.data.login_id,
-                image: img,
+        if (this.isLogin() == true) {
+            this._authService.userData().subscribe((res) => {
+                let img = gData.assetsBaseURL + res.data.image;
+                this.user.set({
+                    id: res.data.id,
+                    loginId: res.data.login_id,
+                    image: img,
+                });
             });
-        });
+        }
     }
 }
