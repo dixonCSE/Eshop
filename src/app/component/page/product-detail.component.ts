@@ -27,6 +27,14 @@ import { BreakpointService } from 'src/app/service/breakpoint.service';
             td {
                 border-bottom: 1px solid rgba(125, 125, 125, 0.5);
             }
+
+            .bg-buyNow {
+                background-color: #72f1f1 !important;
+            }
+
+            .bg-addCart {
+                background-color: #ffd99d !important;
+            }
         </style>
 
         <!-- <section id="breadcrumb">
@@ -109,20 +117,17 @@ import { BreakpointService } from 'src/app/service/breakpoint.service';
                         </div>
                     </div>
 
-                    <div class="flex justify-between mt-2">
+                    <div class="flex justify-center mt-2">
                         <button
-                            class="mx-2"
+                            class="mx-2 bg-addCart"
                             mat-flat-button
-                            color="primary"
                             (click)="addCart()"
                         >
-                            <mat-icon>add</mat-icon>
-                            <mat-icon>shopping_cart</mat-icon>
+                            Add cart
                         </button>
                         <button
-                            class="mx-2"
+                            class="mx-2 bg-buyNow"
                             mat-flat-button
-                            color="primary"
                             (click)="buyNow()"
                         >
                             Buy now

@@ -310,6 +310,7 @@ export class LoginComponent implements OnInit, OnDestroy {
 
                     //let redirect = res.data.redirect;
                     this._userStateService.isLoginTrue();
+                    this._userStateService.loadUserState();
                     this._router.navigate(['/']);
                 } else {
                     this.isLoading = false;

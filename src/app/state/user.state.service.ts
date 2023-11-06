@@ -6,6 +6,8 @@ export interface User {
     id: number;
     loginId: string;
     image: string | null;
+    phone: string | null;
+    email: string | null;
 }
 
 @Injectable({
@@ -32,6 +34,8 @@ export class UserStateService {
                     id: res.data.id,
                     loginId: res.data.login_id,
                     image: img,
+                    phone: res.data.phone,
+                    email: res.data.email,
                 });
             });
         }

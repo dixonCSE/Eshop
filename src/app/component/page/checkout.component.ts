@@ -13,6 +13,7 @@ import {
 } from '@angular/forms';
 import { CartService } from 'src/app/service/cart.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { UserStateService } from 'src/app/state/user.state.service';
 
 @Component({
     selector: 'checkout-component',
@@ -233,6 +234,9 @@ export class CheckoutComponent implements OnInit {
     isSubmitBtnEnable = true;
     isLoading = false;
 
+    email: string | null = null;
+    phone: string | null = null;
+
     pickPoints: any[] = [];
 
     constructor(
@@ -240,22 +244,27 @@ export class CheckoutComponent implements OnInit {
         private _cartService: CartService,
         private fb: FormBuilder,
         private _snackBar: MatSnackBar,
-        private _router: Router
+        private _router: Router,
+        public _userStateService: UserStateService
     ) {
         //
     }
 
     ngOnInit(): void {
+        this.email = this._userStateService.user()?.email ?? null;
+        this.phone = this._userStateService.user()?.phone ?? null;
         this.form = this.fb.group({
             username: ['', [Validators.required]],
-            email: [''],
+            email: [this.email],
             phone: [
-                '',
+                this.phone,
                 [Validators.required, Validators.pattern('[0][1][0-9]{9}')],
             ],
             address: ['', [Validators.required]],
             pickPoint: ['', [Validators.required]],
         });
+
+        console.log(this._userStateService.user()?.phone);
 
         this._cartService.pickPoint().subscribe(
             (res) => {
