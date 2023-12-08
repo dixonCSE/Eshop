@@ -57,6 +57,12 @@ import { BreakpointService } from 'src/app/service/breakpoint.service';
                 <div class="text-center text-amber-500 font-bold my-2  ">
                     {{ product?.product.price | currency }}
                 </div>
+                <div
+                    class="text-center text-amber-500 font-bold my-2 line-through "
+                    *ngIf="product?.product.old_price != 0"
+                >
+                    {{ product?.product.old_price | currency }}
+                </div>
             </div>
 
             <mat-card>
@@ -215,6 +221,7 @@ export class ProductDetailComponent {
             this.productId = val['id'];
             this._productService.getProduct(val['id']).subscribe((res) => {
                 this.product = res;
+                //console.log(res);
             });
         });
     }

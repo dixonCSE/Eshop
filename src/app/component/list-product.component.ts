@@ -74,12 +74,18 @@ import { RouterLink } from '@angular/router';
                             <span>{{ product.name | truncate }}</span>
                         </a>
                     </div>
-                    <div>
+                    <div class="flex justify-between w-full">
                         <div>
                             <span class="text-sm">{{
                                 product.price | currency
                             }}</span>
                             <!-- <span class="text-sm">$</span> -->
+                        </div>
+
+                        <div *ngIf="product.old_price != 0">
+                            <span class="text-sm line-through">{{
+                                product.old_price | currency
+                            }}</span>
                         </div>
                     </div>
                 </mat-card-content>
