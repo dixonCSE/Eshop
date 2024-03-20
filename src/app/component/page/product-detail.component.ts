@@ -16,6 +16,9 @@ import { BreakpointService } from 'src/app/service/breakpoint.service';
     styles: [],
     template: `
         <style>
+            :host {
+                color: #000;
+            }
             .p-img {
                 width: 100%;
             }
@@ -139,6 +142,10 @@ import { BreakpointService } from 'src/app/service/breakpoint.service';
                             Buy now
                         </button>
                     </div>
+
+                    <div class="text-center text-emerald-800 font-bold my-2 ">
+                        {{ product?.product.point }} <span>PT</span>
+                    </div>
                 </mat-card-content>
             </mat-card>
         </section>
@@ -151,8 +158,14 @@ import { BreakpointService } from 'src/app/service/breakpoint.service';
                 <mat-card>
                     <mat-card-content>
                         <mat-tab-group mat-align-tabs="start">
-                            <mat-tab label="spec">
-                                <table>
+                            <mat-tab label="Detail">
+                                <span class="text-black">{{
+                                    product?.product.description
+                                }}</span>
+                            </mat-tab>
+
+                            <mat-tab label="Spec">
+                                <!-- <table>
                                     <thead>
                                         <tr>
                                             <th
@@ -186,14 +199,12 @@ import { BreakpointService } from 'src/app/service/breakpoint.service';
                                             </td>
                                         </tr>
                                     </tbody>
-                                </table>
-                            </mat-tab>
+                                </table> -->
 
-                            <mat-tab label="detail">
-                                {{ product?.product.description }}
+                                <span class="text-black">{{
+                                    product?.product.specification
+                                }}</span>
                             </mat-tab>
-
-                            <mat-tab label="review"> </mat-tab>
                         </mat-tab-group>
                     </mat-card-content>
                 </mat-card>

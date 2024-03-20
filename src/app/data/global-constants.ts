@@ -1,5 +1,4 @@
 export class GlobalConstants {
-    public static apiBaseURL: string =
-        'https://ac.relationsupershop.com/ecom/api/';
-    public static assetsBaseURL: string = 'https://ac.relationsupershop.com/';
+    public static apiBaseURL: string = 'https://back.ecom.rcw100.net/ecom/api/';
+    public static assetsBaseURL: string = 'https://back.ecom.rcw100.net/';
 }

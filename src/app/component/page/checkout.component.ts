@@ -175,7 +175,22 @@ import { UserStateService } from 'src/app/state/user.state.service';
                                 appearance="outline"
                                 hideRequiredMarker
                             >
-                                <mat-label> Address </mat-label>
+                                <mat-label> User Code </mat-label>
+                                <input
+                                    matInput
+                                    #phone
+                                    type="text"
+                                    id="user_code"
+                                    formControlName="user_code"
+                                />
+                            </mat-form-field>
+                        </p>
+                        <p>
+                            <mat-form-field
+                                appearance="outline"
+                                hideRequiredMarker
+                            >
+                                <mat-label> Shipping Address </mat-label>
 
                                 <textarea
                                     matInput
@@ -192,7 +207,7 @@ import { UserStateService } from 'src/app/state/user.state.service';
                             </mat-form-field>
                         </p>
 
-                        <p>
+                        <!-- <p>
                             <mat-form-field
                                 appearance="outline"
                                 hideRequiredMarker
@@ -212,7 +227,7 @@ import { UserStateService } from 'src/app/state/user.state.service';
                                     </mat-option>
                                 </mat-select>
                             </mat-form-field>
-                        </p>
+                        </p> -->
                     </mat-card-content>
                     <mat-card-actions>
                         <button
@@ -256,17 +271,18 @@ export class CheckoutComponent implements OnInit {
         this.form = this.fb.group({
             username: ['', [Validators.required]],
             email: [this.email],
+            user_code: [''],
             phone: [
                 this.phone,
                 [Validators.required, Validators.pattern('[0][1][0-9]{9}')],
             ],
             address: ['', [Validators.required]],
-            pickPoint: ['', [Validators.required]],
+            /* pickPoint: ['', [Validators.required]], */
         });
 
         console.log(this._userStateService.user()?.phone);
 
-        this._cartService.pickPoint().subscribe(
+        /* this._cartService.pickPoint().subscribe(
             (res) => {
                 if (res.type == 'success') {
                     this.pickPoints = res.data;
@@ -275,7 +291,7 @@ export class CheckoutComponent implements OnInit {
             (err) => {
                 console.log(err);
             }
-        );
+        ); */
     }
 
     onSubmit() {
@@ -296,7 +312,8 @@ export class CheckoutComponent implements OnInit {
             phone: this.form.value.phone,
             email: this.form.value.email,
             address: this.form.value.address,
-            pickpoint: this.form.value.pickPoint,
+            user_code: this.form.value.user_code,
+            /* pickpoint: this.form.value.pickPoint, */
             user_order_item: user_order_item,
         };
 

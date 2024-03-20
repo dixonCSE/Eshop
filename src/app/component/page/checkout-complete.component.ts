@@ -59,8 +59,8 @@ import { UserOrderService } from 'src/app/service/user-order.service';
         </style>
 
         <mat-card class="mb-2">
-            <mat-card-content class="successtitle text-center"
-                >Checkout success</mat-card-content
+            <mat-card-content class="successtitle text-center">
+                Order Successful</mat-card-content
             >
         </mat-card>
 
@@ -77,16 +77,22 @@ import { UserOrderService } from 'src/app/service/user-order.service';
                         <tbody>
                             <tr
                                 *ngFor="
-                                    let item of userOrder?.user_order_item;
+                                    let item of userOrder?.order_item;
                                     let i = index
                                 "
                             >
                                 <td class="text-left">
                                     <div>{{ item.name | titlecase }}</div>
-                                    <div>{{ item.price }} X {{ item.qty }}</div>
+                                    <div>
+                                        {{ item.unit_price }} X
+                                        {{ item.total_qty }}
+                                    </div>
                                 </td>
                                 <td class="text-left">
-                                    {{ item.price * item.qty | currency }}
+                                    {{
+                                        item.unit_price * item.total_qty
+                                            | currency
+                                    }}
                                 </td>
                             </tr>
                             <tr>
@@ -94,10 +100,7 @@ import { UserOrderService } from 'src/app/service/user-order.service';
                                     <div>Total</div>
                                 </td>
                                 <td class="text-left text-green-500">
-                                    {{
-                                        userOrder?.user_order.net_price
-                                            | currency
-                                    }}
+                                    {{ userOrder?.total_price | currency }}
                                 </td>
                             </tr>
                         </tbody>
@@ -120,39 +123,57 @@ import { UserOrderService } from 'src/app/service/user-order.service';
                                     <div class="py-2">Name</div>
                                 </td>
                                 <td class="text-right py-2">
-                                    {{ userOrder?.shipping_address.name }}
+                                    {{ userOrder?.user_name }}
                                 </td>
                             </tr>
                             <tr>
                                 <td class="text-left">
-                                    <div class="py-2">phone</div>
+                                    <div class="py-2">Phone</div>
                                 </td>
                                 <td class="text-right py-2">
-                                    {{ userOrder.shipping_address.phone }}
+                                    {{ userOrder?.phone }}
                                 </td>
                             </tr>
                             <tr>
                                 <td class="text-left">
-                                    <div class="py-2">email</div>
+                                    <div class="py-2">Email</div>
                                 </td>
                                 <td class="text-right py-2">
-                                    {{ userOrder.shipping_address.email }}
+                                    {{ userOrder?.email }}
                                 </td>
                             </tr>
                             <tr>
                                 <td class="text-left">
-                                    <div class="py-2">address</div>
+                                    <div class="py-2">Address</div>
                                 </td>
                                 <td class="text-right py-2">
-                                    {{ userOrder.shipping_address.address_1 }}
+                                    {{ userOrder?.shipping_address }}
                                 </td>
                             </tr>
                             <tr>
                                 <td class="text-left">
-                                    <div class="py-2">pick point</div>
+                                    <div class="py-2">User Code</div>
                                 </td>
                                 <td class="text-right py-2">
-                                    {{ userOrder.shipping_address.address_2 }}
+                                    {{ userOrder?.user_code }}
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td class="text-left">
+                                    <div class="py-2">Status</div>
+                                </td>
+                                <td class="text-right py-2">
+                                    {{ userOrder?.status }}
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td class="text-left">
+                                    <div class="py-2">Created Date</div>
+                                </td>
+                                <td class="text-right py-2">
+                                    {{ userOrder?.created_date }}
                                 </td>
                             </tr>
                         </tbody>
@@ -180,10 +201,12 @@ export class CheckoutCompleteComponent implements OnInit {
     ngOnInit(): void {
         this._activatedRoute.params.subscribe((val) => {
             this.id = val['num'];
+            console.log(this.id);
             this._userOrderService.getUserOrder(this.id).subscribe(
                 (res) => {
                     if (res.type == 'success') {
                         this.userOrder = res.data;
+                        console.log(res.data);
                     }
                 },
                 (err) => {

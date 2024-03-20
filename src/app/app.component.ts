@@ -104,11 +104,11 @@ export class AppComponent implements OnInit, OnDestroy {
             }
         });
 
-        if (this._authService.isLogin()) {
+        /* if (this._authService.isLogin()) {
             this._userStateService.isLoginTrue();
         } else {
             this._userStateService.isLoginFalse();
-        }
+        } */
 
         this._userStateService.loadUserState();
 
@@ -161,7 +161,7 @@ export class AppComponent implements OnInit, OnDestroy {
     }
 
     onLogOut() {
-        this._userStateService.isLoginFalse();
-        this._authService.userLogout();
+        // this._userStateService.isLoginFalse();
+        // this._authService.userLogout();
     }
 }
